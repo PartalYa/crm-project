@@ -34,7 +34,7 @@ Start development server:
 npm run dev
 ```
 
-Package the Electron app:
+Build for production:
 
 ```bash
 npm run build
