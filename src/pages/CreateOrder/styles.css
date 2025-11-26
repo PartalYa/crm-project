@@ -1,0 +1,52 @@
+.nav-tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 56px;
+  padding: 0 16px;
+  font-size: var(--text-md);
+  line-height: 20px;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  &:not(.active) {
+    color: var(--color-black);
+    background-color: transparent;
+    color: black;
+    &:hover {
+      color: var(--color-blue-hover);
+    }
+    &:active {
+      color: var(--color-blue-active);
+    }
+  }
+  &.active {
+    background-color: var(--color-blue);
+    color: white;
+
+    &:hover {
+      background-color: var(--color-blue-hover);
+    }
+    &:active {
+      background-color: var(--color-blue-active);
+    }
+  }
+  &.disabled {
+    color: var(--color-gray);
+    background-color: transparent;
+    cursor: not-allowed;
+
+    &:hover,
+    &:active {
+      color: var(--color-gray-dark);
+      background-color: transparent;
+    }
+  }
+}
+
+.bar-img {
+  will-change: transform;
+  image-rendering: crisp-edges;
+}

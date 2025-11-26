@@ -1,0 +1,162 @@
+@layer theme, base, components, utilities;
+
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/preflight.css' layer(base);
+@import 'tailwindcss/utilities.css';
+@import './roboto-fonts.css';
+
+@theme {
+  --font-display: 'Roboto', sans-serif;
+  --font-secondary: 'Roboto Condensed', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+
+  --text-xs: 10px;
+  --text-sm: 12px;
+  --text-base: 14px;
+  --text-md: 16px;
+  --text-xl: 24px;
+
+  --color-blue: #1459a6;
+  --color-blue-hover: #437ab8;
+  --color-blue-active: #0e3e74;
+  --color-green: #83d780;
+  --color-light-green: #60b05c;
+  --color-gray: #b7c4c4;
+  --color-gray-dark: #8d9090;
+  --color-gray-accent: #f2f2f2;
+  --color-lines: #e8eeee;
+  --color-border: #eff1f6;
+  --color-green-accent: #d0e6ff;
+  --color-black: #0e0e0e;
+  --color-black-hover: #242323;
+  --color-yellow-tag: #f6e0a7;
+  --color-green-tag: #83d780;
+  --color-red-tag: #f9bac0;
+  --color-red: #e81515;
+  --color-error: #e81515;
+}
+
+.shadow {
+  box-shadow: 0px 10px 30px 0px #0e0e0e1a;
+}
+
+.tag {
+  height: 24px;
+  padding: 0 10px;
+  border-radius: 12px;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  background-color: var(--color-gray-accent);
+  color: var(--color-black);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.divider-h {
+  border-bottom: 1px solid var(--color-lines);
+  width: 100%;
+}
+.divider-v {
+  border-right: 1px solid var(--color-lines);
+  height: 100%;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 12px;
+  padding: 15px 0;
+  transform: scale(0.5);
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0);
+}
+
+.scrollbar::-webkit-scrollbar-corner {
+  background: rgba(0, 0, 0, 0);
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #9ea9b9;
+  border-radius: 20px;
+  border: 3px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+}
+
+.scrollbar-small::-webkit-scrollbar {
+  width: 4px;
+  padding: 15px 0;
+  transform: scale(0.5);
+}
+
+.scrollbar-small::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0);
+}
+
+.scrollbar-small::-webkit-scrollbar-corner {
+  background: rgba(0, 0, 0, 0);
+}
+
+.scrollbar-small::-webkit-scrollbar-thumb {
+  background: #9ea9b9;
+
+  border: 0px solid rgba(0, 0, 0, 0);
+  border-top-width: 10px;
+  border-bottom-width: 10px;
+  border-radius: 100px;
+  background-clip: padding-box;
+}
+
+/* Overlay Scrollbars Custom Theme */
+.os-theme-custom > .os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle {
+  background-color: #9ea9b9;
+  border-radius: 2px;
+  min-height: 20px;
+  min-width: 20px;
+}
+
+.os-theme-custom > .os-scrollbar-vertical {
+  width: 6px;
+  right: 2px;
+}
+
+.os-theme-custom > .os-scrollbar-vertical > .os-scrollbar-track > .os-scrollbar-handle {
+  width: 4px;
+  right: 1px;
+}
+
+.os-theme-custom > .os-scrollbar-horizontal {
+  height: 6px;
+  bottom: 2px;
+}
+
+.os-theme-custom > .os-scrollbar-horizontal > .os-scrollbar-track > .os-scrollbar-handle {
+  height: 4px;
+  bottom: 1px;
+}
+
+.os-theme-custom > .os-scrollbar > .os-scrollbar-track {
+  background-color: transparent;
+}
+
+.os-theme-custom > .os-scrollbar:hover > .os-scrollbar-track > .os-scrollbar-handle,
+.os-theme-custom > .os-scrollbar.os-scrollbar-active > .os-scrollbar-track > .os-scrollbar-handle {
+  background-color: #9ea9b9;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

@@ -1,0 +1,199 @@
+import * as XLSX from 'xlsx';
+import { OrderData } from '../data/mockOrderData';
+
+// Helper function to get readable status label
+const getStatusLabel = (status: number): string => {
+  const statusLabels = {
+    1: 'В обробці',
+    2: 'Готово',
+    3: 'Завершено',
+  };
+  return statusLabels[status as keyof typeof statusLabels] || `Статус ${status}`;
+};
+
+// Helper function to format date
+const formatDate = (date: Date | string): string => {
+  if (!date) return '-';
+
+  // Convert to Date object if it's a string
+  const dateObj = date instanceof Date ? date : new Date(date);
+
+  // Check if the date is valid
+  if (isNaN(dateObj.getTime())) return '-';
+
+  return dateObj.toLocaleDateString('en-US');
+};
+
+// Helper function to format currency
+const formatCurrency = (amount: number): string => {
+  return amount.toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+};
+
+// Helper function to format weight
+const formatWeight = (weight: number): string => {
+  return weight.toLocaleString('en-US', {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 2,
+  });
+};
+
+export const exportOrdersToExcel = (ordersData: OrderData[]) => {
+  // Create worksheet data with headers matching the OrdersTable
+  const worksheetData = [
+    [
+      '№',
+      'Статус',
+      'Дата прийому',
+      'Дата видачі',
+      'Фірма',
+      'Прийомка',
+      'Клієнт',
+      'Прайс ліст',
+      'Сума',
+      'Оплата',
+      'Борг',
+      'Склад',
+      'Бірка',
+      'Кількість товарів',
+      'Вага',
+      'Виїзне замовлення',
+      'Є фото',
+      'Примітки',
+    ],
+    // Data rows
+    ...ordersData.map((order) => [
+      order.orderNumber,
+      getStatusLabel(order.status),
+      formatDate(order.createdDate),
+      formatDate(order.updatedDate),
+      order.company,
+      order.receiver,
+      order.client,
+      order.priceList,
+      formatCurrency(order.amount),
+      formatCurrency(order.amount), // Same as amount for now
+      formatCurrency(order.amount), // Same as amount for now
+      order.warehouse,
+      order.tag,
+      order.items.toString(),
+      formatWeight(order.weight),
+      order.isOutbound ? 'Так' : 'Ні',
+      order.hasPhotos ? 'Так' : 'Ні',
+      order.notes || '-',
+    ]),
+  ];
+
+  // Create workbook and worksheet
+  const workbook = XLSX.utils.book_new();
+  const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
+
+  // Style the headers
+  const headerStyle = {
+    font: { bold: true },
+    alignment: { horizontal: 'center', vertical: 'center' },
+    fill: { fgColor: { rgb: 'E6E6FA' } },
+    border: {
+      top: { style: 'thin' },
+      bottom: { style: 'thin' },
+      left: { style: 'thin' },
+      right: { style: 'thin' },
+    },
+  };
+
+  // Apply styles to headers (row 1)
+  const headerCells = [
+    'A1',
+    'B1',
+    'C1',
+    'D1',
+    'E1',
+    'F1',
+    'G1',
+    'H1',
+    'I1',
+    'J1',
+    'K1',
+    'L1',
+    'M1',
+    'N1',
+    'O1',
+    'P1',
+    'Q1',
+    'R1',
+  ];
+
+  headerCells.forEach((cell) => {
+    if (!worksheet[cell]) worksheet[cell] = {};
+    worksheet[cell].s = headerStyle;
+  });
+
+  // Set column widths to match the table
+  const columnWidths = [
+    { wch: 15 }, // №
+    { wch: 12 }, // Статус
+    { wch: 18 }, // Дата прийому
+    { wch: 18 }, // Дата видачі
+    { wch: 25 }, // Фірма
+    { wch: 25 }, // Прийомка
+    { wch: 25 }, // Клієнт
+    { wch: 20 }, // Прайс ліст
+    { wch: 15 }, // Сума
+    { wch: 15 }, // Оплата
+    { wch: 15 }, // Борг
+    { wch: 30 }, // Склад
+    { wch: 15 }, // Бірка
+    { wch: 18 }, // Кількість товарів
+    { wch: 12 }, // Вага
+    { wch: 18 }, // Виїзне замовлення
+    { wch: 12 }, // Є фото
+    { wch: 40 }, // Примітки
+  ];
+  worksheet['!cols'] = columnWidths;
+
+  // Add auto-filter to the headers
+  const lastColumn = String.fromCharCode(65 + columnWidths.length - 1); // Convert to letter (A=65)
+  const lastRow = ordersData.length + 1;
+  worksheet['!autofilter'] = { ref: `A1:${lastColumn}${lastRow}` };
+
+  // Freeze the header row
+  worksheet['!freeze'] = { xSplit: 0, ySplit: 1 };
+
+  // Add worksheet to workbook
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'Замовлення');
+
+  // Generate filename with current date
+  const filename = `orders_export_${new Date().toISOString().slice(0, 10)}.xlsx`;
+
+  // Write and download file
+  XLSX.writeFile(workbook, filename, { bookType: 'xlsx' });
+
+  console.log(`Excel file exported: ${filename}`);
+
+  return filename;
+};
+
+// Export function for selected orders only
+export const exportSelectedOrdersToExcel = (ordersData: OrderData[], selectedIds: string[]) => {
+  const selectedOrders = ordersData.filter((_, index) => selectedIds.includes(index.toString()));
+
+  if (selectedOrders.length === 0) {
+    console.warn('No orders selected for export');
+    return;
+  }
+
+  // Use the same export function but with filtered data
+  const filename = exportOrdersToExcel(selectedOrders);
+
+  // Update the filename to indicate it's a selection
+  const selectionFilename = filename.replace(
+    'orders_export_',
+    `selected_orders_${selectedOrders.length}_`,
+  );
+
+  console.log(`Selected orders exported: ${selectionFilename}`);
+
+  return selectionFilename;
+};

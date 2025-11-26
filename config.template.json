@@ -1,0 +1,26 @@
+{
+  "user": {
+    "id": "user_001",
+    "name": "John Doe",
+    "initials": "JD"
+  },
+  "business": {
+    "name": "John's Supplies",
+    "point": "Point #1"
+  },
+  "defaultSettings": {
+    "warehouse": {
+      "id": "warehouse_main",
+      "name": "Main Warehouse"
+    },
+    "deliveryWarehouse": {
+      "id": "warehouse_delivery",
+      "name": "Delivery Warehouse"
+    },
+    "company": {
+      "id": "company_main",
+      "name": "John's Supplies Ltd."
+    },
+    "urgencyType": "normal"
+  }
+}
