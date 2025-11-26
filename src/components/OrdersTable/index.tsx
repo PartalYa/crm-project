@@ -148,72 +148,64 @@ export default function OrdersTable({ data, className = '' }: OrdersTableProps) 
         cell: (info) => <span className="">{info.getValue()}</span>,
       }),
 
-      // Статус
       columnHelper.accessor('status', {
-        header: 'Статус',
+        header: 'Status',
         size: 77,
         cell: (info) => <span className="">{info.getValue()}</span>,
-      }), // Дата прийому
+      }),
+
       columnHelper.accessor('createdDate', {
-        header: 'Дата прийому',
+        header: 'Received Date',
         size: 148,
         cell: (info) => {
           const date = info.getValue();
-          if (!date) return <span>Невідома дата</span>;
-
+          if (!date) return <span>Unknown Date</span>;
           // Convert to Date object if it's a string
           const dateObj = date instanceof Date ? date : new Date(date);
           return <span>{dateObj.toLocaleDateString('en-US')}</span>;
         },
       }),
 
-      // Дата видачі
       columnHelper.accessor('updatedDate', {
-        header: 'Дата видачі',
+        header: 'Issued Date',
         size: 148,
         cell: (info) => {
           const date = info.getValue();
-          if (!date) return <span>Невідома дата</span>;
-
+          if (!date) return <span>Unknown Date</span>;
           // Convert to Date object if it's a string
           const dateObj = date instanceof Date ? date : new Date(date);
           return <span>{dateObj.toLocaleDateString('en-US')}</span>;
         },
       }),
 
-      // Фірма (Company/Warehouse)
       columnHelper.accessor('company', {
-        header: 'Фірма',
+        header: 'Company',
         size: 200,
         cell: (info) => <span className="">{info.getValue()}</span>,
       }),
 
-      // Приймач (Receiver - using tag field)
       columnHelper.accessor('receiver', {
-        header: 'Приймач',
+        header: 'Receiver',
         size: 200,
         cell: (info) => <span className="">{info.getValue()}</span>,
       }),
 
-      // Клієнт
       columnHelper.accessor('client', {
-        header: 'Клієнт',
+        header: 'Client',
         size: 200,
         cell: (info) => <span className="">{info.getValue()}</span>,
       }),
 
-      // Прайс ліст (Price list - using type)
       columnHelper.accessor('priceList', {
-        header: 'Прайс ліст',
+        header: 'Price List',
         size: 200,
         cell: (info) => {
           return <span>{info.getValue()}</span>;
         },
       }),
 
-      // Сума
       columnHelper.accessor('amount', {
-        header: 'Сума',
+        header: 'Amount',
         size: 140,
         cell: (info) => {
           const amount = info.getValue();
@@ -228,10 +220,9 @@ export default function OrdersTable({ data, className = '' }: OrdersTableProps) 
         },
       }),
 
-      // Оплата (Payment - same as amount for now)
       columnHelper.accessor('amount', {
         id: 'payment',
-        header: 'Оплата',
+        header: 'Payment',
         size: 140,
         cell: (info) => {
           const amount = info.getValue();
@@ -246,10 +237,9 @@ export default function OrdersTable({ data, className = '' }: OrdersTableProps) 
         },
       }),
 
-      // Борг (Debt - calculating as difference)
       columnHelper.display({
         id: 'debt',
-        header: 'Борг',
+        header: 'Debt',
         size: 140,
         cell: ({ row }) => {
           const amount = row.original.amount;
@@ -265,10 +255,9 @@ export default function OrdersTable({ data, className = '' }: OrdersTableProps) 
         },
       }),
 
-      // Склад
       columnHelper.accessor('warehouse', {
         id: 'warehouse-display',
-        header: 'Склад',
+        header: 'Warehouse',
         size: 200,
         cell: (info) => <span className="">{info.getValue()}</span>,
       }),
@@ -410,13 +399,6 @@ export default function OrdersTable({ data, className = '' }: OrdersTableProps) 
                 <PrintIcon className="w-4 h-4 fill-current" />
                 Export
               </button>
-              {/* <button
-                className="text-black hover:text-blue-hover active:text-blue-active transition-[.2s] flex items-center gap-2 text-base font-semibold"
-                onClick={() => console.log('Print selected orders')}
-              >
-                <PrintIcon className="w-4 h-4 fill-current" />
-                Друк
-              </button> */}
             </div>
           </div>
         )}

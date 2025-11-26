@@ -78,7 +78,7 @@ export default function ReportPage() {
       const paymentTypes = ['Cash', 'Card', 'Cashless'];
       const services = ['Washing', 'Ironing', 'Dry Cleaning', 'Clothing Repair'];
       const clients = ['John Smith', 'Sarah Johnson', 'Michael Williams', 'Emily Brown'];
-      const pps = ['Saltivka', 'Center', 'Pavlova'];
+      const pps = ['Point #1', 'Point #2', 'Point #3'];
       const data = [];
       for (let i = 0; i < count; i++) {
         data.push({
@@ -94,8 +94,8 @@ export default function ReportPage() {
     }
 
     function generateOperationalData(count = 100) {
-      const employees = ['Kovalenko A.', 'Gritsenko V.', 'Melnyk I.', 'Shevchenko O.'];
-      const pps = ['Saltivka', 'Center', 'Pavlova'];
+      const employees = ['John Smith', 'Emily Brown', 'Michael Williams', 'Mike Myers'];
+      const pps = ['Point #1', 'Point #2', 'Point #3'];
       const data = [];
       for (let i = 0; i < count; i++) {
         data.push({
@@ -113,8 +113,8 @@ export default function ReportPage() {
 
     function generateWarehouseData(count = 100) {
       const materials = ['Powder', 'Bleach', 'Stain Remover', 'Soap'];
-      const pps = ['Saltivka', 'Center', 'Pavlova'];
-      const employees = ['Kovalenko A.', 'Gritsenko V.', 'Melnyk I.', 'Shevchenko O.'];
+      const pps = ['Point #1', 'Point #2', 'Point #3'];
+      const employees = ['John Smith', 'Emily Brown', 'Michael Williams', 'Mike Myers'];
       const services = ['Washing', 'Ironing', 'Dry Cleaning', 'Clothing Repair'];
       const comments = ['-', 'Urgent', 'Needs Verification', 'Completed'];
       const data = [];
@@ -321,9 +321,9 @@ export default function ReportPage() {
             label="Reception Point"
             options={[
               { label: 'All', value: 'all' },
-              { label: 'Saltivka', value: 'Saltivka' },
-              { label: 'Center', value: 'Center' },
-              { label: 'Pavlova', value: 'Pavlova' },
+              { label: 'Point #1', value: 'Point #1' },
+              { label: 'Point #2', value: 'Point #2' },
+              { label: 'Point #3', value: 'Point #3' },
             ]}
             value={selectedPP}
             placeholder="Reception"
