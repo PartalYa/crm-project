@@ -4,11 +4,11 @@ import { OrderData } from '../data/mockOrderData';
 // Helper function to get readable status label
 const getStatusLabel = (status: number): string => {
   const statusLabels = {
-    1: 'В обробці',
-    2: 'Готово',
-    3: 'Завершено',
+    1: 'In Progress',
+    2: 'Ready',
+    3: 'Completed',
   };
-  return statusLabels[status as keyof typeof statusLabels] || `Статус ${status}`;
+  return statusLabels[status as keyof typeof statusLabels] || `Status ${status}`;
 };
 
 // Helper function to format date
@@ -45,23 +45,23 @@ export const exportOrdersToExcel = (ordersData: OrderData[]) => {
   const worksheetData = [
     [
       '№',
-      'Статус',
-      'Дата прийому',
-      'Дата видачі',
-      'Фірма',
-      'Прийомка',
-      'Клієнт',
-      'Прайс ліст',
-      'Сума',
-      'Оплата',
-      'Борг',
-      'Склад',
-      'Бірка',
-      'Кількість товарів',
-      'Вага',
-      'Виїзне замовлення',
-      'Є фото',
-      'Примітки',
+      'Status',
+      'Date Received',
+      'Date Issued',
+      'Company',
+      'Receiver',
+      'Client',
+      'Price List',
+      'Amount',
+      'Payment',
+      'Debt',
+      'Warehouse',
+      'Tag',
+      'Number of Items',
+      'Weight',
+      'Outbound Order',
+      'Has Photos',
+      'Notes',
     ],
     // Data rows
     ...ordersData.map((order) => [
@@ -80,8 +80,8 @@ export const exportOrdersToExcel = (ordersData: OrderData[]) => {
       order.tag,
       order.items.toString(),
       formatWeight(order.weight),
-      order.isOutbound ? 'Так' : 'Ні',
-      order.hasPhotos ? 'Так' : 'Ні',
+      order.isOutbound ? 'Yes' : 'No',
+      order.hasPhotos ? 'Yes' : 'No',
       order.notes || '-',
     ]),
   ];
@@ -133,23 +133,23 @@ export const exportOrdersToExcel = (ordersData: OrderData[]) => {
   // Set column widths to match the table
   const columnWidths = [
     { wch: 15 }, // №
-    { wch: 12 }, // Статус
-    { wch: 18 }, // Дата прийому
-    { wch: 18 }, // Дата видачі
-    { wch: 25 }, // Фірма
-    { wch: 25 }, // Прийомка
-    { wch: 25 }, // Клієнт
-    { wch: 20 }, // Прайс ліст
-    { wch: 15 }, // Сума
-    { wch: 15 }, // Оплата
-    { wch: 15 }, // Борг
-    { wch: 30 }, // Склад
-    { wch: 15 }, // Бірка
-    { wch: 18 }, // Кількість товарів
-    { wch: 12 }, // Вага
-    { wch: 18 }, // Виїзне замовлення
-    { wch: 12 }, // Є фото
-    { wch: 40 }, // Примітки
+    { wch: 12 }, // Status
+    { wch: 18 }, // Date Received
+    { wch: 18 }, // Date Issued
+    { wch: 25 }, // Company
+    { wch: 25 }, // Receiver
+    { wch: 25 }, // Client
+    { wch: 20 }, // Price List
+    { wch: 15 }, // Amount
+    { wch: 15 }, // Payment
+    { wch: 15 }, // Debt
+    { wch: 30 }, // Warehouse
+    { wch: 15 }, // Tag
+    { wch: 18 }, // Number of Items
+    { wch: 12 }, // Weight
+    { wch: 18 }, // Outbound Order
+    { wch: 12 }, // Has Photos
+    { wch: 40 }, // Notes
   ];
   worksheet['!cols'] = columnWidths;
 
@@ -162,7 +162,7 @@ export const exportOrdersToExcel = (ordersData: OrderData[]) => {
   worksheet['!freeze'] = { xSplit: 0, ySplit: 1 };
 
   // Add worksheet to workbook
-  XLSX.utils.book_append_sheet(workbook, worksheet, 'Замовлення');
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'Orders');
 
   // Generate filename with current date
   const filename = `orders_export_${new Date().toISOString().slice(0, 10)}.xlsx`;

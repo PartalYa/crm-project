@@ -5,7 +5,7 @@ A desktop CRM application built with Electron, React, TypeScript, and Vite.
 ## Features
 
 - Multi-step Order Creation
-- Three report types: Financial, Operational, and Warehouse
+- Exportable reports and tables
 - Filtering by date range, location, payment type, and service type
 - Real-time data filtering and searching
 - Excel export functionality with progress tracking
@@ -34,16 +34,10 @@ Start development server:
 npm run dev
 ```
 
-Build for production:
-
-```bash
-npm run build
-```
-
 Package the Electron app:
 
 ```bash
-npm run dist
+npm run build
 ```
 
 ## Key Skills Demonstrated

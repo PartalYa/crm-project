@@ -524,7 +524,6 @@ export default function Step3() {
             )}
           </div>
           <div className="divider-h my-6" />
-          {/* <span className="text-md font-semibold">02. Матрац</span> */}
         </div>
         {data.services.length > 0 && (
           <div className="bg-white rounded-2xl flex flex-col gap-2 w-[419px] shrink-0 py-4 px-6 relative overflow-y-auto scrollbar-small">

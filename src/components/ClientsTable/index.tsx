@@ -342,13 +342,6 @@ export default function ClientsTable({ data, className = '' }: ClientsTableProps
                 <PrintIcon className="w-4 h-4 fill-current" />
                 Export
               </button>
-              {/* <button
-                className="text-black hover:text-blue-hover active:text-blue-active transition-[.2s] flex items-center gap-2 text-base font-semibold"
-                onClick={() => console.log('Print selected clients')}
-              >
-                <PrintIcon className="w-4 h-4 fill-current" />
-                Друк
-              </button> */}
             </div>
           </div>
         )}

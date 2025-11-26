@@ -148,7 +148,7 @@ export const exportClientsToExcel = (clientsData: ClientData[]) => {
   worksheet['!freeze'] = { xSplit: 0, ySplit: 1 };
 
   // Add worksheet to workbook
-  XLSX.utils.book_append_sheet(workbook, worksheet, 'Клієнти');
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'Clients');
 
   // Generate filename with current date
   const filename = `clients_export_${new Date().toISOString().slice(0, 10)}.xlsx`;

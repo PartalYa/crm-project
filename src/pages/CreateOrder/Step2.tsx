@@ -162,22 +162,7 @@ export default function Step2() {
             inputClassName="w-full"
             inputWrapperClassName="w-full"
             disabled
-            // iconRight={
-            //   <button
-            //     onClick={(e) => {
-            //       e.preventDefault();
-            //       setOrderNumber(generateOrderNumber());
-            //     }}
-            //     className="text-blue hover:text-blue-hover active:text-blue-active text-sm font-medium"
-            //     title="Згенерувати номер"
-            //   >
-            //     Авто
-            //   </button>
-            // }
           />
-          {/* <div className="text-xs text-gray mt-1">
-              {!orderNumber && 'Натисніть "Авто" для автоматичної генерації номера'}
-            </div> */}
 
           <Input
             label="Tag"

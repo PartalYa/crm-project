@@ -11,9 +11,9 @@ import { useCreateOrderStore, Service } from '../../stores/createOrderStore';
 import RadioGroup, { RadioItem } from '../../components/Radio';
 
 const markupOptions = [
-  { value: 'none', label: 'Без націнки' },
-  { value: 'fixed', label: 'Фіксована націнка' },
-  { value: 'percentage', label: 'Відсоткова націнка' },
+  { value: 'none', label: 'No markup' },
+  { value: 'fixed', label: 'Fixed markup' },
+  { value: 'percentage', label: 'Percentage markup' },
 ];
 
 const extraOptionsList = [
